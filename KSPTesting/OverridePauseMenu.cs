@@ -18,11 +18,45 @@ namespace KSPTesting
         public void OnPause()
         {
             // Kill vanilla pause menu, doesn't even render for 1 frame!
-            PauseMenu.Close();            
+            PauseMenu.Close();
 
-            // This doesn't actually work here, it can't happen on the same frame.
-            // Not problem in a 'real world' application.
-            FlightDriver.SetPause(false);
+            DialogOption[] options = { new DialogOption("Resume Simulation", invokeResume),                                         
+                                       new DialogOption("Build this Vessel", invokeBuild),
+                                       new DialogOption("Abort Simulation", invokeAbort), 
+                                       new DialogOption("Restart Simulation", invokeRestart),
+                                       new DialogOption("Settings", invokeSettings)};
+
+            PopupDialog.SpawnPopupDialog(new MultiOptionDialog(null, 
+                                                               "Game Paused - Simulation", 
+                                                               (GameObject.FindObjectOfType(typeof(PauseMenu)) as PauseMenu).guiSkin, 
+                                                               options), 
+                                                               false,
+                                                               HighLogic.Skin);
+        }
+
+        public void invokeResume()
+        {
+
+        }
+
+        public void invokeBuild()
+        {
+
+        }
+
+        public void invokeAbort()
+        {
+
+        }
+
+        public void invokeRestart()
+        {
+
+        }
+
+        public void invokeSettings()
+        {
+
         }
 
         public void OnDestroy()
