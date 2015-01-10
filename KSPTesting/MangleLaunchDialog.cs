@@ -13,10 +13,13 @@ namespace KSPTesting
         public void Start()
         {
             GameEvents.onGUILaunchScreenSpawn.Add(onGUILaunchScreenSpawn);
-            LaunchSiteFacility lsf = GameObject.FindObjectOfType(typeof(LaunchSiteFacility)) as LaunchSiteFacility;
-            Debug.Log("LSF SubFolder: " + lsf.craftSubfolder);
+            LaunchSiteFacility[] lsf = GameObject.FindObjectsOfType(typeof(LaunchSiteFacility)) as LaunchSiteFacility[];
 
-            lsf.craftSubfolder = "VAB-Complete";
+            foreach (LaunchSiteFacility f in lsf)
+            {
+                Debug.Log("LSF SubFolder: " + f.craftSubfolder);
+                f.craftSubfolder = f.craftSubfolder+"-Complete";
+            }
         }
 
         public void onGUILaunchScreenSpawn(GameEvents.VesselSpawnInfo vesselSpawnInfo)
