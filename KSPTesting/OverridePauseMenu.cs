@@ -17,8 +17,9 @@ namespace KSPTesting
 
         public void OnPause()
         {
-            // Kill vanilla pause menu, doesn't even render for 1 frame!
             PauseMenu.Close();
+
+            GUISkin guiSkin = (GameObject.FindObjectOfType(typeof(PauseMenu)) as PauseMenu).guiSkin;
 
             DialogOption[] options = { new DialogOption("Resume Simulation", invokeResume),                                         
                                        new DialogOption("Build this Vessel", invokeBuild),
@@ -26,12 +27,7 @@ namespace KSPTesting
                                        new DialogOption("Restart Simulation", invokeRestart),
                                        new DialogOption("Settings", invokeSettings)};
 
-            PopupDialog.SpawnPopupDialog(new MultiOptionDialog(null, 
-                                                               "Game Paused - Simulation", 
-                                                               (GameObject.FindObjectOfType(typeof(PauseMenu)) as PauseMenu).guiSkin, 
-                                                               options), 
-                                                               false,
-                                                               HighLogic.Skin);
+            PopupDialog.SpawnPopupDialog(new MultiOptionDialog(null, "Game Paused - Simulation", guiSkin, options), false, guiSkin);
         }
 
         public void invokeResume()
